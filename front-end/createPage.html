@@ -1,0 +1,116 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="BinSin News page">
+    <meta name="author" content="BinSin">
+
+    <title>BinSin News</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/carousel.css" rel="stylesheet">
+  </head>
+  <body>
+    <br/>
+    <header>
+
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-success">
+        <a class="navbar-brand" href="index.html">BinSin News</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createPage.html">Create</a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main">
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <td><input id="title"></input>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Content</td>
+              <td><textarea id="content" rows="15" cols="120"></textarea></td>
+            </tr>
+            <tr>
+              <th>Image Url</td>
+              <td><input id="image"></input></td>
+            </tr>
+            <tr>
+              <th>News Url</td>
+              <td><input id="url"></input></td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="submitButton">Sumbit</button>
+
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <!-- aws lambda
+    ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script type="text/javascript">
+        var API_URL = "https://ummugyqsy3.execute-api.ap-northeast-2.amazonaws.com/prob/news";
+
+        $('#submitButton').on('click', function(){
+          $.ajax({
+            type: 'POST',
+            url: API_URL,
+            data: JSON.stringify({
+              "title": $('#title').val(),
+              "content": $('#content').val(),
+              "image": $('#image').val(),
+              "url": $('#url').val()
+            }),
+            contentType: "application/json",
+
+            success: function(data){
+              location.reload();
+            }
+          });
+
+          return false;
+        });
+      </script>
+
+  </body>
+</html>
