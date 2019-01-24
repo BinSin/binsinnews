@@ -30,6 +30,9 @@
             <li class="nav-item">
               <a class="nav-link" href="createPage.html">Create</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="deletePage.html">Delete</a>
+            </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -71,7 +74,7 @@
         <div id="other-news" class="row">
 
         </div><!-- /.row -->
-        
+
       </div><!-- /.container -->
 
 
@@ -98,15 +101,15 @@
 
           $(document).ready(function() {
             $.ajax({
+
               type: 'GET',
               url: API_URL,
 
               success: function(data) {
                 $('#news').html('');
-
-                var mainNews = data.Items.sort(function(a, b) {
+                var mainNews = data.Items.sort((a, b) => {
                   return b.date-a.date;
-                })
+                });
 
                 var otherNews = mainNews.splice(3);
 
@@ -139,26 +142,8 @@
                       '</div>'
                     );
                   });
-
                 }
               });
-          });
-
-          $('#submitButton').on('click', function(){
-            $.ajax({
-              type: 'POST',
-              url: API_URL,
-              data: JSON.stringify({
-                "title": $('#title').val()
-              }),
-              contentType: "application/json",
-
-              success: function(data){
-                location.reload();
-              }
-            });
-
-            return false;
           });
         </script>
 

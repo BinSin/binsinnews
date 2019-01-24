@@ -29,10 +29,10 @@
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="createPage.html">Create</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="deletePage.html">Delete</a>
             </li>
           </ul>
@@ -55,26 +55,8 @@
               <td><input id="date"></input>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th>Title</th>
-              <td><input id="title"></input>
-            </tr>
-            <tr>
-              <th>Content</td>
-              <td><textarea id="content" rows="15" cols="120"></textarea></td>
-            </tr>
-            <tr>
-              <th>Image Url</td>
-              <td><input id="image"></input></td>
-            </tr>
-            <tr>
-              <th>News Url</td>
-              <td><input id="url"></input></td>
-            </tr>
-          </tbody>
         </table>
-        <button id="submitButton">Sumbit</button>
+        <button id="deleteButton">Delete</button>
 
 
       <!-- FOOTER -->
@@ -98,16 +80,12 @@
       <script type="text/javascript">
         var API_URL = "https://ummugyqsy3.execute-api.ap-northeast-2.amazonaws.com/prob/news";
 
-        $('#submitButton').on('click', function(){
+        $('#deleteButton').on('click', function(){
           $.ajax({
-            type: 'POST',
+            type: 'DELETE',
             url: API_URL,
             data: JSON.stringify({
-              "date": $('#date').val(),
-              "title": $('#title').val(),
-              "content": $('#content').val(),
-              "image": $('#image').val(),
-              "url": $('#url').val()
+              "date": $('#date').val()
             }),
             contentType: "application/json",
 
@@ -115,9 +93,9 @@
               location.reload();
             }
           });
-
           return false;
         });
+
       </script>
 
   </body>

@@ -6,16 +6,16 @@ const docClient = new AWS.DynamoDB.DocumentClient({region: 'ap-northeast-2'});
 exports.handle = function(e, ctx, callback) {
 
 	console.log(e);
+
 	var params = {
+		TableName: 'news',
 		Item: {
-			date: Date.now(),
+			date: e.date,
 			title : e.title,
 			content : e.content,
 			image : e.image,
 			url : e.url
-		},
-
-		TableName: 'test-news'
+		}
 	};
 
 	docClient.put(params, function(err, data){

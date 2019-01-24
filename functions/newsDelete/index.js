@@ -1,21 +1,26 @@
-console.log("read all news");
+console.log('delete news');
 
 const AWS = require('aws-sdk');
+
 const docClient = new AWS.DynamoDB.DocumentClient({region: 'ap-northeast-2'});
 
 exports.handle = function(e, ctx, callback) {
 
-	let scanningParameters = {
-		TableName : 'news',
-		Limit: 100
+	console.log(e);
+	
+	var param = {
+		TableName: "news",
+		Key: {
+			"date": e.date
+		}
 	};
-
-	docClient.scan(scanningParameters, function(err, data){
-		if(err){
+	
+	docClient.delete(param, function(err, data) {
+		if(err) {
 			callback(err, null);
-		}else{
+		} else {
 			callback(null, data);
 		}
 	});
 
-}
+};
